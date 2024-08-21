@@ -1,0 +1,7 @@
+#dynamicEl {
+  background-color: #999;
+  padding: 5px;
+  border: unset;
+  border-radius: 8px;
+  box-shadow: 1px 1px 4px 0 black;
+}

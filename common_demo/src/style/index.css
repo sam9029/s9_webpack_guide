@@ -1,0 +1,44 @@
+div {
+  margin: 10px;
+}
+.wrapper {
+  width: 320px;
+  height: 160px;
+  border: 1px solid #999;
+  color: skyblue;
+}
+
+.wrapper.has-img {
+  background: url(../imgs/logo_01.png) no-repeat;
+  background-size: 100% 100%;
+}
+
+.conatiner:has(.title:hover) .bald-edit {
+  opacity: 1;
+}
+@property --c1 {
+  syntax: '<color>';
+  inherits: false;
+  initial-value: #4634ee;
+}
+@property --c2 {
+  syntax: '<color>';
+  inherits: false;
+  initial-value: #d77f69;
+}
+h1 {
+  background: linear-gradient(45deg, var(--c1), var(--c2));
+}
+@keyframes move {
+  50% {
+    --c1: #d77f69;
+    --c2: #4634ee;
+  }
+  100% {
+    --c1: #4634ee;
+    --c2: #d77f69;
+  }
+}
+h1 {
+  animation: move 5s linear infinite;
+}

@@ -1,0 +1,17 @@
+$color: red;
+
+.wrapper-sass {
+  width: 320px;
+  height: 160px;
+  border: 1px solid hsl(0, 0%, 60%);
+  color: $color;
+}
+
+.wrapper-sass.has-img {
+  background: url(../imgs/logo_02.png) no-repeat;
+  background-size: 100% 100%;
+}
+.wrapper-sass.has-img-withcompress{
+  background: url(../imgs/favicon32.png) no-repeat;
+  // background-size: 100% 100%;
+}

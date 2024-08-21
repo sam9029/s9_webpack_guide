@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>webpack5</title>
+    <!-- 由 `HtmlWebpackPlugin` 自动引入 js、css等 文件 -->
+  </head>
+  <body>
+    <h1>Hello Webpack5</h1>
+    <h1>Hello</h1>
+    <!-- 准备一个使用样式的 DOM 容器 -->
+    <h2>处理样式资源</h2>
+    <div class="wrapper">wrapper</div>
+    <div class="wrapper-less">wrapper-less</div>
+    <div class="wrapper-sass">wrapper-sass</div>
+
+    <h2>处理图片资源</h2>
+    <div class="wrapper has-img">wrapper</div>
+    <div class="wrapper-sass has-img">wrapper-sass</div>
+    <div class="wrapper-sass has-img-withcompress">wrapper-sass</div>
+
+    <h2>处理字体资源</h2>
+    <div class="wrapper">
+      <i class="iconfont sn-icon-RectangleCopy"></i>
+      <i class="iconfont sn-icon-RectangleCopy5"></i>
+      <span class="iconfont sn-icon-RectangleCopy5"></span>
+    </div>
+
+    <div>
+      <div class="conatiner">
+        <div class="title">标题</div>
+        <div class="btn-group">
+          <i class="bald-edit" style="opacity: 0"></i>
+          <i class="bald-more"></i>
+        </div>
+      </div>
+    </div>
+
+    <div id="video">
+
+    </div>
+
+    <h1>MapMost Alpha</h1>
+
+    <div>
+      <button id="dynamicEl">
+        测试动态引入文件（打开控制台-网络，点击之后会请求加载一个新的JS文件）
+      </button>
+    </div>
+  </body>
+</html>
