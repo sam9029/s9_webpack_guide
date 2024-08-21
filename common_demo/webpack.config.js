@@ -177,15 +177,15 @@ module.exports = {
     /** css压缩  */
     new CssMinimizerPlugin(),
     /** 可视化依赖分析配置 */
-    new BundleAnalyzerPlugin({
-      analyzerMode: "server",
-      analyzerHost: "127.0.0.1",
-      analyzerPort: 'auto', // 自动使用未使用的端口 或者 '6789'自行设置
-      openAnalyzer: true,
-      generateStatsFile: false,
-      statsOptions: null,
-      logLevel: "info",
-    }),
+    // new BundleAnalyzerPlugin({
+    //   analyzerMode: "server",
+    //   analyzerHost: "127.0.0.1",
+    //   analyzerPort: 'auto', // 自动使用未使用的端口 或者 '6789'自行设置
+    //   openAnalyzer: true,
+    //   generateStatsFile: false,
+    //   statsOptions: null,
+    //   logLevel: "info",
+    // }),
     /** 预加载文件资源配置 */
     new PreloadWebpackPlugin({
       rel: "preload", // preload兼容性更好
