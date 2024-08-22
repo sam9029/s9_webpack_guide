@@ -6,6 +6,14 @@
 
 通用（合并了生产和开发模式）的配置
 
+关于 `webpack.dev.js` 和 `webpack.prod.js` 可以提取相同配置组成 `webpack.common.js`的
+
+但是我懒不想配置了，直接就在一个文件 `webpack.config.js`在文件里拿环境变量
+
+来判断生产和开发环境的不同配置是否生效即可
+
+但是也可供了完备的  webpack.dev.js 和 webpack.prod.js 配置文件 以供参考
+
 - webpack.dev.js (仅参考--可删)
 
 单独的开发模式的配置
