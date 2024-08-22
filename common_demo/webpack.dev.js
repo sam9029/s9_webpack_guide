@@ -20,7 +20,6 @@ const BundleAnalyzerPlugin =
   require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
 
 //#region 工具函数集
-const isProduction = process.env.NODE_ENV === "production";
 
 /**
  * @description 获取处理css样式的loaders工具配置函数, 配置了基础的loader，同时接收传参自定义loader
@@ -29,8 +28,8 @@ const isProduction = process.env.NODE_ENV === "production";
  */
 const setStyleLoaders = (preProcessorList = []) => {
   return [
-    // [生产模式]下单独提取css文件loader并压缩; [开发模式]仅提取JS样式为CSS的style文件引入即可
-    isProduction ? MiniCssExtractPlugin.loader : "style-loader",
+    //[开发模式]仅提取JS样式为CSS的style文件引入即可
+    "style-loader",
     // 基础css-loader
     "css-loader",
     // css代码兼容处理loader配置
@@ -161,7 +160,7 @@ module.exports = {
         "node_modules/.cache/.eslintcache"
       ),
     }),
-
+    
     /** 模板 html 处理 */
     new HtmlWebpackPlugin({
       // 以 public/index.html 为模板创建文件
@@ -169,14 +168,6 @@ module.exports = {
       template: path.resolve(__dirname, "public/index.html"),
     }),
 
-    /** css文件提取处理 --- [生产模式]下压缩 */
-    isProduction &&
-      new MiniCssExtractPlugin({
-        // 定义输出文件名和目录
-        filename: "static/css/[name].[contenthash:8].css",
-        chunkFilename: "static/css/[name].[contenthash:8].chunk.css",
-      }),
-    
     /** css压缩  */
     new CssMinimizerPlugin(),
     /** 可视化依赖分析配置 */
@@ -189,7 +180,7 @@ module.exports = {
     //   statsOptions: null,
     //   logLevel: "info",
     // }),
-    
+
     /** 预加载文件资源配置 */
     new PreloadWebpackPlugin({
       rel: "preload", // preload兼容性更好
@@ -251,6 +242,7 @@ module.exports = {
     maxAssetSize: 5 * 1024 * 1024, // 5MB
   },
 
-  /** mode: 环境模式由package.json脚本命令手动控制 */
+  /** mode: 环境模式 */
+  mode:'development'
 };
 //#endregion

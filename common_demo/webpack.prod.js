@@ -20,7 +20,6 @@ const BundleAnalyzerPlugin =
   require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
 
 //#region 工具函数集
-const isProduction = process.env.NODE_ENV === "production";
 
 /**
  * @description 获取处理css样式的loaders工具配置函数, 配置了基础的loader，同时接收传参自定义loader
@@ -29,8 +28,8 @@ const isProduction = process.env.NODE_ENV === "production";
  */
 const setStyleLoaders = (preProcessorList = []) => {
   return [
-    // [生产模式]下单独提取css文件loader并压缩; [开发模式]仅提取JS样式为CSS的style文件引入即可
-    isProduction ? MiniCssExtractPlugin.loader : "style-loader",
+    // [生产模式]下单独提取css文件loader并压缩;
+    MiniCssExtractPlugin.loader,
     // 基础css-loader
     "css-loader",
     // css代码兼容处理loader配置
@@ -170,15 +169,15 @@ module.exports = {
     }),
 
     /** css文件提取处理 --- [生产模式]下压缩 */
-    isProduction &&
-      new MiniCssExtractPlugin({
-        // 定义输出文件名和目录
-        filename: "static/css/[name].[contenthash:8].css",
-        chunkFilename: "static/css/[name].[contenthash:8].chunk.css",
-      }),
-    
+    new MiniCssExtractPlugin({
+      // 定义输出文件名和目录
+      filename: "static/css/[name].[contenthash:8].css",
+      chunkFilename: "static/css/[name].[contenthash:8].chunk.css",
+    }),
+
     /** css压缩  */
     new CssMinimizerPlugin(),
+
     /** 可视化依赖分析配置 */
     // new BundleAnalyzerPlugin({
     //   analyzerMode: "server",
@@ -189,7 +188,7 @@ module.exports = {
     //   statsOptions: null,
     //   logLevel: "info",
     // }),
-    
+
     /** 预加载文件资源配置 */
     new PreloadWebpackPlugin({
       rel: "preload", // preload兼容性更好
@@ -234,15 +233,6 @@ module.exports = {
     },
   },
 
-  /** 配置开发服务器 */
-  devServer: {
-    host: "localhost", // 启动服务器域名
-    port: "3000", // 启动服务器端口号
-    open: true, // 是否自动打开浏览器
-    hot: true, // 热更新
-    compress: true, // 压缩
-  },
-
   /** 资源(asset)和入口起点超过指定文件限制 */
   performance: {
     // 入口文件的最大体积控制(单位: bytes)
@@ -251,6 +241,7 @@ module.exports = {
     maxAssetSize: 5 * 1024 * 1024, // 5MB
   },
 
-  /** mode: 环境模式由package.json脚本命令手动控制 */
+  /** mode: 环境模式*/
+  mode:'production'
 };
 //#endregion
