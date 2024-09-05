@@ -1,0 +1,24 @@
+// styles/element/index.scss
+/* 只需要重写你需要的即可 */
+@forward "element-plus/theme-chalk/src/common/var.scss" with (
+  $colors: (
+    "primary": (
+      "base": #00a4e4,
+    ),
+    "success": (
+      "base": #c1d82f,
+    ),
+    "warning": (
+      "base": #ffdd00,
+    ),
+    "danger": (
+      "base": #fe5000,
+    ),
+    "error": (
+      "base": #ff0000,
+    ),
+    "info": (
+      "base": #909399,
+    ),
+  )
+);

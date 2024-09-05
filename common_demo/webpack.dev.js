@@ -9,6 +9,8 @@ const path = require("path");
 const ESLintWebpackPlugin = require("eslint-webpack-plugin");
 /** html文件处理  */
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+/** 拷贝资源Plugin*/
+const CopyPlugin = require("copy-webpack-plugin");
 /** css文件提取处理 */
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 /** css文件压缩处理 */
@@ -186,6 +188,20 @@ module.exports = {
       rel: "preload", // preload兼容性更好
       as: "script",
       // rel: 'prefetch' // prefetch兼容性更差
+    }),
+
+    /** 复制public资源到index里面 */
+    new CopyPlugin({
+      patterns: [
+        {
+          from: path.resolve(__dirname, "./public"), //将根文件夹下 public文件夹复制到dist目录下
+          to: path.resolve(__dirname, "./dist"),
+          globOptions: {
+            // 忽略index.html文件
+            ignore: ["**/index.html"],
+          },
+        },
+      ],
     }),
   ],
 

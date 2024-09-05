@@ -9,6 +9,8 @@ const path = require("path");
 const ESLintWebpackPlugin = require("eslint-webpack-plugin");
 /** html文件处理  */
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+/** 拷贝资源Plugin*/
+const CopyPlugin = require("copy-webpack-plugin");
 /** css文件提取处理 */
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 /** css文件压缩处理 */
@@ -170,9 +172,8 @@ module.exports = {
 
     /** css文件提取处理 --- [生产模式]下压缩 */
     new MiniCssExtractPlugin({
-      // 定义输出文件名和目录
-      filename: "static/css/[name].[contenthash:8].css",
-      chunkFilename: "static/css/[name].[contenthash:8].chunk.css",
+      filename: "static/css/[name].[contenthash:6].css", // 定义输出静态文件名和目录
+      chunkFilename: "static/css/[name].[contenthash:6].chunk.css", // 定义输出动态引入文件名和目录
     }),
 
     /** css压缩  */
@@ -194,6 +195,20 @@ module.exports = {
       rel: "preload", // preload兼容性更好
       as: "script",
       // rel: 'prefetch' // prefetch兼容性更差
+    }),
+
+    /** 复制public资源到index里面 */
+    new CopyPlugin({
+      patterns: [
+        {
+          from: path.resolve(__dirname, "./public"), //将根文件夹下 public文件夹复制到dist目录下
+          to: path.resolve(__dirname, "./dist"),
+          globOptions: {
+            // 忽略index.html文件
+            ignore: ["**/index.html"],
+          },
+        },
+      ],
     }),
   ],
 
@@ -242,6 +257,6 @@ module.exports = {
   },
 
   /** mode: 环境模式*/
-  mode:'production'
+  mode: "production",
 };
 //#endregion

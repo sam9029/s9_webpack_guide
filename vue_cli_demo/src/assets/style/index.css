@@ -1,0 +1,18 @@
+/* 高级CSS属性 */
+@property --base-color {
+  syntax: "<color>";
+  inherits: false;
+  initial-value: #c0ffee;
+}
+
+:root {
+  --base-color: #0085f2;
+}
+
+.my-color {
+  color: var(--base-color);
+}
+
+.text {
+  color: #4ce060;
+}

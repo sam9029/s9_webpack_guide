@@ -9,6 +9,8 @@ const path = require("path");
 const ESLintWebpackPlugin = require("eslint-webpack-plugin");
 /** html文件处理  */
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+/** 拷贝资源Plugin*/
+const CopyPlugin = require("copy-webpack-plugin");
 /** css文件提取处理 */
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 /** css文件压缩处理 */
@@ -29,8 +31,8 @@ const isProduction = process.env.NODE_ENV === "production";
  */
 const setStyleLoaders = (preProcessorList = []) => {
   return [
-    // [生产模式]下单独提取css文件loader并压缩; [开发模式]仅提取JS样式为CSS的style文件引入即可
-    isProduction ? MiniCssExtractPlugin.loader : "style-loader",
+    // 下单独提取css文件loader并压缩
+    MiniCssExtractPlugin.loader,
     // 基础css-loader
     "css-loader",
     // css代码兼容处理loader配置
@@ -169,14 +171,12 @@ module.exports = {
       template: path.resolve(__dirname, "public/index.html"),
     }),
 
-    /** css文件提取处理 --- [生产模式]下压缩 */
-    isProduction &&
-      new MiniCssExtractPlugin({
-        // 定义输出文件名和目录
-        filename: "static/css/[name].[contenthash:8].css",
-        chunkFilename: "static/css/[name].[contenthash:8].chunk.css",
-      }),
-    
+    /** css文件提取处理 */
+    new MiniCssExtractPlugin({
+      filename: "static/css/[name].[contenthash:6].css", // 定义输出静态文件名和目录
+      chunkFilename: "static/css/[name].[contenthash:6].chunk.css", // 定义输出动态引入文件名和目录
+    }),
+
     /** css压缩  */
     new CssMinimizerPlugin(),
     /** 可视化依赖分析配置 */
@@ -189,12 +189,26 @@ module.exports = {
     //   statsOptions: null,
     //   logLevel: "info",
     // }),
-    
+
     /** 预加载文件资源配置 */
     new PreloadWebpackPlugin({
       rel: "preload", // preload兼容性更好
       as: "script",
       // rel: 'prefetch' // prefetch兼容性更差
+    }),
+
+    /** 复制public资源到index里面 */
+    new CopyPlugin({
+      patterns: [
+        {
+          from: path.resolve(__dirname, "./public"), //将根文件夹下 public文件夹复制到dist目录下
+          to: path.resolve(__dirname, "./dist"),
+          globOptions: {
+            // 忽略index.html文件
+            ignore: ["**/index.html"],
+          },
+        },
+      ],
     }),
   ],
 
@@ -252,5 +266,6 @@ module.exports = {
   },
 
   /** mode: 环境模式由package.json脚本命令手动控制 */
+  mode: isProduction ? 'production':'development'
 };
 //#endregion
