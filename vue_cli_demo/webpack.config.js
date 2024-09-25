@@ -331,5 +331,5 @@ module.exports = {
   mode: envMode,
 
   /** 源码映射--SourceMap */
-  devtool: isProduction ? "source-map" : "eval-cheap-module-source-map",
+  // devtool: isProduction ? "source-map" : "eval-cheap-module-source-map",
 };
