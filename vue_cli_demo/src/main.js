@@ -6,6 +6,9 @@ import App from "./app.vue";
 import router from "./router/index.js";
 /** pinia状态管理 */
 import { createPinia } from "pinia";
+/** 日期时间处理依赖 */
+// import '@/utils/date.js'
+
 
 /* 引入 CSS 资源，Webpack才会对其打包 */
 import "@/assets/style/index.css";

@@ -248,10 +248,16 @@ module.exports = {
 
     /** 可视化依赖分析配置 */
     new BundleAnalyzerPlugin({
-      analyzerMode: "server",
+      /**
+       **server**: run server to show bundle report
+       **static**: generated report.html
+       * */ 
+      analyzerMode: "static", 
       analyzerHost: "127.0.0.1",
       analyzerPort: 'auto', // 自动使用未使用的端口 或者 '6789'自行设置
-      openAnalyzer: true,
+      reportFilename: 'report.html',
+      defaultSizes: 'parsed', // 默认显示在报告中的模块大小匹配方式。应该是stat，parsed或者gzip中的一个。
+      openAnalyzer: false,
       generateStatsFile: false,
       statsOptions: null,
       logLevel: "info",
@@ -260,6 +266,7 @@ module.exports = {
 
   optimization: {
     chunkIds: "named",
+    concatenateModules: false, // 关闭并联--解决依赖展示(entry-modules--concatenated)
 
     minimize: true,
     minimizer: [

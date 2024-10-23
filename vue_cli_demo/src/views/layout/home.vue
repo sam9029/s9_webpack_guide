@@ -1,6 +1,6 @@
 <template>
   <div class="container__wrapper">
-    <h2>vue3-page-template</h2>
+    <h2>hello webpack </h2>
     <h2 class="text">test-text</h2>
     <h2 class="my-color">test-my-color-text</h2>
     <button id="dynamicEl">test-dynamic-import-file</button>
